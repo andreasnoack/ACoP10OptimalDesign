@@ -46,7 +46,7 @@ param = (θ₁=0.15,
          σ=0.01)
 
 data_full_profile = simobs(model, data[1:5], param, obstimes=range(0, stop=last(data[1].time), length=1000))
-plot(data_full_profile[1].times, [data_full_profile[i].observed.conc for i in 1:5], title="Warfarin", xlabel="time (in hours)", ylabel="concentation")
+plot(data_full_profile[1].times, [data_full_profile[i].observed.conc for i in 1:5], title="Warfarin", xlabel="time (in hours)", ylabel="concentration (mg/L)", linewidth=3)
 
 fim() = Pumas._expected_information(model, data[1], param, zeros(3), Pumas.FO())
 
