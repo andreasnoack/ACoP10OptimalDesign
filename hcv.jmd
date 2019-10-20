@@ -131,7 +131,12 @@ pop = map(i -> Subject(id=i, evs=peg_inf_dr, time=t), 1:30)
 
 ```julia
 data_full_profile = simobs(peg_inf_model, pop[1:5], param_PKPD, obstimes=range(0, stop=4*7, length=1000))
-plot(data_full_profile)
+plot(data_full_profile[1].times, [data_full_profile[i].observed.conc for i in 1:5], title="HPC", xlabel="time (in days)", ylabel="concentation")
+
+```
+
+```julia
+plot(data_full_profile[1].times, [data_full_profile[i].observed.conc for i in 1:5], title="HPC", xlabel="time (in days)", ylabel="log viral particles")
 ```
 
 ```julia

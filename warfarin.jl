@@ -45,7 +45,10 @@ param = (θ₁=0.15,
          Ω=Diagonal([0.07, 0.02, 0.6]),
          σ=0.01)
 
-fim() = Pumas._expected_information_diff(model, data[1], param, zeros(3), Pumas.FO())
+data_full_profile = simobs(model, data[1:5], param, obstimes=range(0, stop=last(data[1].time), length=1000))
+plot(data_full_profile[1].times, [data_full_profile[i].observed.conc for i in 1:5], title="Warfarin", xlabel="time (in hours)", ylabel="concentation")
+
+fim() = Pumas._expected_information(model, data[1], param, zeros(3), Pumas.FO())
 
 @info("[Timer: $(round(time() - t0, digits=2))] Computing block diagonal FIM of warfarin model\nDeterminant of FIM: $(logdet(fim()[1]*length(data)))")
 @info("[Timer: $(round(time() - t0, digits=2))] Timing 1000 evaluations of FIM")
